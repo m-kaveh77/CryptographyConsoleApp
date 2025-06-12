@@ -144,7 +144,12 @@ while (true)
                 continue;
             }
         case "5":
-            break;
+            {
+                Console.Clear();
+                Console.WriteLine("Good Luck. Buy");
+                Console.WriteLine("-----------------------------------------------------------");
+                return;
+            }
         default:
             break;
     }
