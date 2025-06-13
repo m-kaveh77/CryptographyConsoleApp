@@ -1,4 +1,5 @@
-﻿using System.Security.Cryptography;
+﻿using CryptographyConsoleApp.Services.Symmetric;
+using System.Security.Cryptography;
 using System.Text;
 
 while (true)
@@ -29,7 +30,7 @@ while (true)
         case "1":
             {
                 Console.Clear();
-                Console.WriteLine("------------------- Hash algorithms -------------------");
+                Console.WriteLine("------------------- Hash algorithms -----------------------");
                 Console.WriteLine();
                 Console.WriteLine("1. MD5");
                 Console.WriteLine("2. SHA");
@@ -41,7 +42,7 @@ while (true)
 
                 string? algorithm = Console.ReadLine();
 
-                if(string.IsNullOrEmpty(algorithm))
+                if (string.IsNullOrEmpty(algorithm))
                 {
                     Console.WriteLine("You don't select an algorithm");
                     Console.Write("Press any key to continue...");
@@ -49,7 +50,8 @@ while (true)
                     continue;
                 }
 
-                if(algorithm == "1")
+                // MD5
+                if (algorithm == "1")
                 {
                     Console.Write("Enter your text: ");
                     string? text = Console.ReadLine();
@@ -73,6 +75,7 @@ while (true)
                     continue;
                 }
 
+                // SHA
                 if (algorithm == "2")
                 {
                     Console.Write("Enter your text: ");
@@ -101,7 +104,8 @@ while (true)
                     continue;
                 }
 
-                if(algorithm == "3")
+                // Exit
+                if (algorithm == "3")
                 {
                     continue;
                 }
@@ -111,7 +115,339 @@ while (true)
                 continue;
             }
         case "2":
-            break;
+            {
+                Console.Clear();
+                Console.WriteLine("------------------- Symmetric algorithms -------------------");
+                Console.WriteLine();
+                Console.WriteLine("1. DES");
+                Console.WriteLine("2. Triple DES");
+                Console.WriteLine("3. AES");
+                Console.WriteLine("4. Exit");
+                Console.WriteLine();
+                Console.WriteLine("-----------------------------------------------------------");
+
+                Console.Write("Please select your algorithm: ");
+
+                string? algorithm = Console.ReadLine();
+
+                if (string.IsNullOrEmpty(algorithm))
+                {
+                    Console.WriteLine("You don't select an algorithm");
+                    Console.Write("Press any key to continue...");
+                    Console.ReadKey();
+                    continue;
+                }
+
+                // DES
+                if (algorithm == "1")
+                {
+                    Console.Clear();
+                    Console.WriteLine("------------------- Symmetric algorithms -------------------");
+                    Console.WriteLine();
+                    Console.WriteLine("------------------- DES algorithm --------------------------");
+                    Console.WriteLine("1. Encrypt");
+                    Console.WriteLine("2. Decrypt");
+                    Console.WriteLine("3. Exit");
+                    Console.WriteLine();
+                    Console.WriteLine("-----------------------------------------------------------");
+
+                    Console.Write("Please select your operation: ");
+
+                    string? operation = Console.ReadLine();
+
+                    // Encrypt
+                    if (operation == "1")
+                    {
+                        Console.Clear();
+                        Console.WriteLine("------------------- Symmetric algorithms -------------------");
+                        Console.WriteLine();
+                        Console.WriteLine("------------------- DES algorithm --------------------------");
+                        Console.WriteLine();
+                        Console.WriteLine("------------------- Encryption -----------------------------");
+                        Console.WriteLine();
+                        Console.WriteLine("-----------------------------------------------------------");
+
+                        Console.Write("File path to encrypt (Example: D:\\Temp\\temp.txt): ");
+
+                        string? filePath = Console.ReadLine();
+
+                        if (!Path.Exists(filePath))
+                        {
+                            Console.WriteLine("The path does not exists.");
+                            Console.Write("Press any key to continue...");
+                            Console.ReadKey();
+                            continue;
+                        }
+
+                        DesCreator.Encrypt(filePath);
+
+                        Console.WriteLine("The encrypted with IV and Key file has been created.");
+                        Console.Write("Press any key to continue...");
+                        Console.ReadKey();
+                        continue;
+                    }
+
+                    // Decrypt
+                    if (operation == "2")
+                    {
+                        Console.Clear();
+                        Console.WriteLine("------------------- Symmetric algorithms -------------------");
+                        Console.WriteLine();
+                        Console.WriteLine("------------------- DES algorithm --------------------------");
+                        Console.WriteLine();
+                        Console.WriteLine("------------------- Decryption -----------------------------");
+                        Console.WriteLine();
+                        Console.WriteLine("-----------------------------------------------------------");
+
+                        Console.Write("file path to decrypt (Example: D:\\Temp\\temp.txt.des): ");
+
+                        string? filePath = Console.ReadLine();
+
+                        if (!Path.Exists(filePath))
+                        {
+                            Console.WriteLine("The path does not exists.");
+                            Console.Write("Press any key to continue...");
+                            Console.ReadKey();
+                            continue;
+                        }
+
+                        Console.Write("Key file to decrypt (Example: D:\\Temp\\temp.txt.key): ");
+
+                        string? keyFile = Console.ReadLine();
+
+                        if (!Path.Exists(keyFile))
+                        {
+                            Console.WriteLine("The path does not exists.");
+                            Console.Write("Press any key to continue...");
+                            Console.ReadKey();
+                            continue;
+                        }
+
+                        DesCreator.Decrypt(filePath, keyFile);
+
+                        Console.WriteLine("The decrypted file has been created.");
+                        Console.Write("Press any key to continue...");
+                        Console.ReadKey();
+                        continue;
+                    }
+
+                    // Exit
+                    if (operation == "3")
+                    {
+                        continue;
+                    }
+                }
+
+                // Triple DES
+                if (algorithm == "2") 
+                {
+                    Console.Clear();
+                    Console.WriteLine("------------------- Symmetric algorithms -------------------");
+                    Console.WriteLine();
+                    Console.WriteLine("------------------- Triple DES algorithm -------------------");
+                    Console.WriteLine("1. Encrypt");
+                    Console.WriteLine("2. Decrypt");
+                    Console.WriteLine("3. Exit");
+                    Console.WriteLine();
+                    Console.WriteLine("-----------------------------------------------------------");
+
+                    Console.Write("Please select your operation: ");
+
+                    string? operation = Console.ReadLine();
+
+                    // Encrypt
+                    if (operation == "1")
+                    {
+                        Console.Clear();
+                        Console.WriteLine("------------------- Symmetric algorithms -------------------");
+                        Console.WriteLine();
+                        Console.WriteLine("------------------- Triple DES algorithm -------------------");
+                        Console.WriteLine();
+                        Console.WriteLine("------------------- Encryption -----------------------------");
+                        Console.WriteLine();
+                        Console.WriteLine("-----------------------------------------------------------");
+
+                        Console.Write("File path to encrypt (Example: D:\\Temp\\temp.txt): ");
+
+                        string? filePath = Console.ReadLine();
+
+                        if (!Path.Exists(filePath))
+                        {
+                            Console.WriteLine("The path does not exists.");
+                            Console.Write("Press any key to continue...");
+                            Console.ReadKey();
+                            continue;
+                        }
+
+                        TripleDesCreator.Encrypt(filePath);
+
+                        Console.WriteLine("The encrypted with IV and Key file has been created.");
+                        Console.Write("Press any key to continue...");
+                        Console.ReadKey();
+                        continue;
+                    }
+
+                    // Decrypt
+                    if (operation == "2")
+                    {
+                        Console.Clear();
+                        Console.WriteLine("------------------- Symmetric algorithms -------------------");
+                        Console.WriteLine();
+                        Console.WriteLine("------------------- Triple DES algorithm -------------------");
+                        Console.WriteLine();
+                        Console.WriteLine("------------------- Decryption -----------------------------");
+                        Console.WriteLine();
+                        Console.WriteLine("-----------------------------------------------------------");
+
+                        Console.Write("file path to decrypt (Example: D:\\Temp\\temp.txt.tripledes): ");
+
+                        string? filePath = Console.ReadLine();
+
+                        if (!Path.Exists(filePath))
+                        {
+                            Console.WriteLine("The path does not exists.");
+                            Console.Write("Press any key to continue...");
+                            Console.ReadKey();
+                            continue;
+                        }
+
+                        Console.Write("Key file to decrypt (Example: D:\\Temp\\temp.txt.key): ");
+
+                        string? keyFile = Console.ReadLine();
+
+                        if (!Path.Exists(keyFile))
+                        {
+                            Console.WriteLine("The path does not exists.");
+                            Console.Write("Press any key to continue...");
+                            Console.ReadKey();
+                            continue;
+                        }
+
+                        TripleDesCreator.Decrypt(filePath, keyFile);
+
+                        Console.WriteLine("The decrypted file has been created.");
+                        Console.Write("Press any key to continue...");
+                        Console.ReadKey();
+                        continue;
+                    }
+
+                    // Exit
+                    if (operation == "3")
+                    {
+                        continue;
+                    }
+                }
+
+                // AES
+                if (algorithm == "3")
+                {
+                    Console.Clear();
+                    Console.WriteLine("------------------- Symmetric algorithms -------------------");
+                    Console.WriteLine();
+                    Console.WriteLine("------------------- AES algorithm --------------------------");
+                    Console.WriteLine("1. Encrypt");
+                    Console.WriteLine("2. Decrypt");
+                    Console.WriteLine("3. Exit");
+                    Console.WriteLine();
+                    Console.WriteLine("-----------------------------------------------------------");
+
+                    Console.Write("Please select your operation: ");
+
+                    string? operation = Console.ReadLine();
+
+                    // Encrypt
+                    if (operation == "1")
+                    {
+                        Console.Clear();
+                        Console.WriteLine("------------------- Symmetric algorithms -------------------");
+                        Console.WriteLine();
+                        Console.WriteLine("------------------- AES algorithm --------------------------");
+                        Console.WriteLine();
+                        Console.WriteLine("------------------- Encryption -----------------------------");
+                        Console.WriteLine();
+                        Console.WriteLine("-----------------------------------------------------------");
+
+                        Console.Write("File path to encrypt (Example: D:\\Temp\\temp.txt): ");
+
+                        string? filePath = Console.ReadLine();
+
+                        if (!Path.Exists(filePath))
+                        {
+                            Console.WriteLine("The path does not exists.");
+                            Console.Write("Press any key to continue...");
+                            Console.ReadKey();
+                            continue;
+                        }
+
+                        AesCreator.Encrypt(filePath);
+
+                        Console.WriteLine("The encrypted with IV and Key file has been created.");
+                        Console.Write("Press any key to continue...");
+                        Console.ReadKey();
+                        continue;
+                    }
+
+                    // Decrypt
+                    if (operation == "2")
+                    {
+                        Console.Clear();
+                        Console.WriteLine("------------------- Symmetric algorithms -------------------");
+                        Console.WriteLine();
+                        Console.WriteLine("------------------- AES algorithm --------------------------");
+                        Console.WriteLine();
+                        Console.WriteLine("------------------- Decryption -----------------------------");
+                        Console.WriteLine();
+                        Console.WriteLine("-----------------------------------------------------------");
+
+                        Console.Write("file path to decrypt (Example: D:\\Temp\\temp.txt.aes): ");
+
+                        string? filePath = Console.ReadLine();
+
+                        if (!Path.Exists(filePath))
+                        {
+                            Console.WriteLine("The path does not exists.");
+                            Console.Write("Press any key to continue...");
+                            Console.ReadKey();
+                            continue;
+                        }
+
+                        Console.Write("Key file to decrypt (Example: D:\\Temp\\temp.txt.key): ");
+
+                        string? keyFile = Console.ReadLine();
+
+                        if (!Path.Exists(keyFile))
+                        {
+                            Console.WriteLine("The path does not exists.");
+                            Console.Write("Press any key to continue...");
+                            Console.ReadKey();
+                            continue;
+                        }
+
+                        AesCreator.Decrypt(filePath, keyFile);
+
+                        Console.WriteLine("The decrypted file has been created.");
+                        Console.Write("Press any key to continue...");
+                        Console.ReadKey();
+                        continue;
+                    }
+
+                    // Exit
+                    if (operation == "3")
+                    {
+                        continue;
+                    }
+                }
+
+                // Exit
+                if (algorithm == "4")
+                {
+                    continue;
+                }
+
+                Console.Write("Press any key to continue...");
+                Console.ReadKey();
+                continue;
+            }
         case "3":
             break;
         case "4":
@@ -153,4 +489,10 @@ while (true)
         default:
             break;
     }
+}
+
+public class KeyHolder
+{
+    public byte[]? Key { get; set; }
+    public byte[]? IV { get; set; }
 }
