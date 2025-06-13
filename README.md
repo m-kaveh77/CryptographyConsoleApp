@@ -22,7 +22,7 @@ The goal of this project is to demonstrate the implementation of multiple crypto
 
 - 🧮 **Hash Functions:**
   - MD5
-  - SHA (SHA-1, SHA-256, or others if supported)
+  - SHA (SHA-256, SHA-512)
 
 ---
 
