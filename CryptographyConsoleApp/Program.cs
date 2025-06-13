@@ -1,7 +1,6 @@
 ﻿using CryptographyConsoleApp.Services.Asymmetric;
+using CryptographyConsoleApp.Services.Hash;
 using CryptographyConsoleApp.Services.Symmetric;
-using System.Security.Cryptography;
-using System.Text;
 
 while (true)
 {
@@ -65,12 +64,9 @@ while (true)
                         continue;
                     }
 
-                    var md5Hasher = MD5.Create();
-                    var passwordBytes = Encoding.UTF8.GetBytes(text);
-                    var md5HashedBytes = md5Hasher.ComputeHash(passwordBytes);
-                    var md5HashedString = Convert.ToBase64String(md5HashedBytes);
+                    string hashed = HashCreator.MD5Hasher(text);
 
-                    Console.WriteLine($"Hashed text with MD5: {md5HashedString}");
+                    Console.WriteLine($"Hashed text is: {hashed}");
                     Console.Write("Press any key to continue...");
                     Console.ReadKey();
                     continue;
@@ -90,16 +86,10 @@ while (true)
                         continue;
                     }
 
-                    var sha256Hasher = SHA256.Create();
-                    var sha512Hasher = SHA512.Create();
-                    var passwordBytes = Encoding.UTF8.GetBytes(text);
-                    var hashedSha256Bytes = sha256Hasher.ComputeHash(passwordBytes);
-                    var hashedSha512Bytes = sha512Hasher.ComputeHash(passwordBytes);
-                    var hashedSha256String = Convert.ToBase64String(hashedSha256Bytes);
-                    var hashedSha512String = Convert.ToBase64String(hashedSha512Bytes);
+                    string hashedSha256 = HashCreator.SHAHasher(text);
 
-                    Console.WriteLine($"Hashed text with SHA256: {hashedSha256String}");
-                    Console.WriteLine($"Hashed text with SHA512: {hashedSha512String}");
+                    Console.WriteLine($"Hashed text with SHA256 is: {hashedSha256}");
+                    //Console.WriteLine($"Hashed text with SHA512 is: {hashedSha512}");
                     Console.Write("Press any key to continue...");
                     Console.ReadKey();
                     continue;
@@ -240,7 +230,7 @@ while (true)
                 }
 
                 // Triple DES
-                if (algorithm == "2") 
+                if (algorithm == "2")
                 {
                     Console.Clear();
                     Console.WriteLine("------------------- Symmetric algorithms -------------------");
@@ -630,7 +620,12 @@ while (true)
                 return;
             }
         default:
-            break;
+            {
+                Console.WriteLine("Please select valid options");
+                Console.Write("Press any key to continue...");
+                Console.ReadKey();
+                continue;
+            }
     }
 }
 
